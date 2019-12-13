@@ -50,8 +50,8 @@ Partial Class SearchForm2
         'SearchTextBox
         '
         Me.SearchTextBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.SearchTextBox.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SearchTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.SearchTextBox.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SearchTextBox.ForeColor = System.Drawing.SystemColors.ControlLight
         Me.SearchTextBox.Location = New System.Drawing.Point(106, 28)
         Me.SearchTextBox.Name = "SearchTextBox"
         Me.SearchTextBox.Size = New System.Drawing.Size(408, 22)
@@ -61,11 +61,11 @@ Partial Class SearchForm2
         '
         Me.Label1.AutoSize = True
         Me.Label1.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label1.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label1.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLight
         Me.Label1.Location = New System.Drawing.Point(9, 31)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(44, 14)
+        Me.Label1.Size = New System.Drawing.Size(43, 14)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "&Search"
         '
@@ -73,34 +73,34 @@ Partial Class SearchForm2
         '
         Me.Label2.AutoSize = True
         Me.Label2.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label2.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(15, 302)
+        Me.Label2.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.Label2.Location = New System.Drawing.Point(9, 320)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(38, 14)
+        Me.Label2.Size = New System.Drawing.Size(39, 14)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "&Name"
         '
         'ObjectsListbox
         '
         Me.ObjectsListbox.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ObjectsListbox.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ObjectsListbox.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.ObjectsListbox.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ObjectsListbox.ForeColor = System.Drawing.SystemColors.ControlLight
         Me.ObjectsListbox.FormattingEnabled = True
         Me.ObjectsListbox.ItemHeight = 14
-        Me.ObjectsListbox.Location = New System.Drawing.Point(105, 64)
+        Me.ObjectsListbox.Location = New System.Drawing.Point(105, 65)
         Me.ObjectsListbox.Name = "ObjectsListbox"
-        Me.ObjectsListbox.Size = New System.Drawing.Size(410, 242)
+        Me.ObjectsListbox.Size = New System.Drawing.Size(410, 256)
         Me.ObjectsListbox.TabIndex = 3
         '
         'SelectTopButton
         '
         Me.SelectTopButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.SelectTopButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SelectTopButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.SelectTopButton.Location = New System.Drawing.Point(28, 64)
+        Me.SelectTopButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SelectTopButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.SelectTopButton.Location = New System.Drawing.Point(28, 63)
         Me.SelectTopButton.Name = "SelectTopButton"
-        Me.SelectTopButton.Size = New System.Drawing.Size(72, 20)
+        Me.SelectTopButton.Size = New System.Drawing.Size(72, 30)
         Me.SelectTopButton.TabIndex = 4
         Me.SelectTopButton.Text = "&Select Top"
         Me.SelectTopButton.UseVisualStyleBackColor = False
@@ -108,11 +108,11 @@ Partial Class SearchForm2
         'OkayButton
         '
         Me.OkayButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.OkayButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OkayButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.OkayButton.Location = New System.Drawing.Point(533, 29)
+        Me.OkayButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OkayButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.OkayButton.Location = New System.Drawing.Point(533, 26)
         Me.OkayButton.Name = "OkayButton"
-        Me.OkayButton.Size = New System.Drawing.Size(114, 23)
+        Me.OkayButton.Size = New System.Drawing.Size(114, 26)
         Me.OkayButton.TabIndex = 5
         Me.OkayButton.Text = "&Okay"
         Me.OkayButton.UseVisualStyleBackColor = False
@@ -120,11 +120,11 @@ Partial Class SearchForm2
         'DoCanceButton
         '
         Me.DoCanceButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.DoCanceButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DoCanceButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.DoCanceButton.Location = New System.Drawing.Point(533, 69)
+        Me.DoCanceButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DoCanceButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.DoCanceButton.Location = New System.Drawing.Point(533, 66)
         Me.DoCanceButton.Name = "DoCanceButton"
-        Me.DoCanceButton.Size = New System.Drawing.Size(114, 23)
+        Me.DoCanceButton.Size = New System.Drawing.Size(114, 26)
         Me.DoCanceButton.TabIndex = 6
         Me.DoCanceButton.Text = "&Cancel"
         Me.DoCanceButton.UseVisualStyleBackColor = False
@@ -135,11 +135,11 @@ Partial Class SearchForm2
         Me.InsertIntoCodeCheckbox.BackColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.InsertIntoCodeCheckbox.Checked = True
         Me.InsertIntoCodeCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.InsertIntoCodeCheckbox.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.InsertIntoCodeCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.InsertIntoCodeCheckbox.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.InsertIntoCodeCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight
         Me.InsertIntoCodeCheckbox.Location = New System.Drawing.Point(533, 109)
         Me.InsertIntoCodeCheckbox.Name = "InsertIntoCodeCheckbox"
-        Me.InsertIntoCodeCheckbox.Size = New System.Drawing.Size(117, 18)
+        Me.InsertIntoCodeCheckbox.Size = New System.Drawing.Size(113, 18)
         Me.InsertIntoCodeCheckbox.TabIndex = 7
         Me.InsertIntoCodeCheckbox.Text = "Insert Into Code"
         Me.InsertIntoCodeCheckbox.UseVisualStyleBackColor = False
@@ -148,11 +148,11 @@ Partial Class SearchForm2
         '
         Me.PlaceinClipboardCheckbox.AutoSize = True
         Me.PlaceinClipboardCheckbox.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.PlaceinClipboardCheckbox.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.PlaceinClipboardCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.PlaceinClipboardCheckbox.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PlaceinClipboardCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight
         Me.PlaceinClipboardCheckbox.Location = New System.Drawing.Point(533, 143)
         Me.PlaceinClipboardCheckbox.Name = "PlaceinClipboardCheckbox"
-        Me.PlaceinClipboardCheckbox.Size = New System.Drawing.Size(120, 18)
+        Me.PlaceinClipboardCheckbox.Size = New System.Drawing.Size(125, 18)
         Me.PlaceinClipboardCheckbox.TabIndex = 8
         Me.PlaceinClipboardCheckbox.Text = "Place in Clipboard"
         Me.PlaceinClipboardCheckbox.UseVisualStyleBackColor = False
@@ -161,9 +161,9 @@ Partial Class SearchForm2
         '
         Me.TableQueryTextBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.TableQueryTextBox.Enabled = False
-        Me.TableQueryTextBox.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TableQueryTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.TableQueryTextBox.Location = New System.Drawing.Point(105, 324)
+        Me.TableQueryTextBox.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TableQueryTextBox.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.TableQueryTextBox.Location = New System.Drawing.Point(128, 343)
         Me.TableQueryTextBox.Name = "TableQueryTextBox"
         Me.TableQueryTextBox.Size = New System.Drawing.Size(315, 22)
         Me.TableQueryTextBox.TabIndex = 9
@@ -172,11 +172,11 @@ Partial Class SearchForm2
         '
         Me.Label3.AutoSize = True
         Me.Label3.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label3.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(9, 331)
+        Me.Label3.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.Label3.Location = New System.Drawing.Point(9, 346)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(105, 14)
+        Me.Label3.Size = New System.Drawing.Size(101, 14)
         Me.Label3.TabIndex = 10
         Me.Label3.Text = "Last Object Name"
         '
@@ -185,11 +185,11 @@ Partial Class SearchForm2
         Me.ShowFieldsCheckbox.AutoSize = True
         Me.ShowFieldsCheckbox.BackColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.ShowFieldsCheckbox.Enabled = False
-        Me.ShowFieldsCheckbox.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ShowFieldsCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.ShowFieldsCheckbox.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ShowFieldsCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight
         Me.ShowFieldsCheckbox.Location = New System.Drawing.Point(533, 177)
         Me.ShowFieldsCheckbox.Name = "ShowFieldsCheckbox"
-        Me.ShowFieldsCheckbox.Size = New System.Drawing.Size(127, 18)
+        Me.ShowFieldsCheckbox.Size = New System.Drawing.Size(128, 18)
         Me.ShowFieldsCheckbox.TabIndex = 11
         Me.ShowFieldsCheckbox.Text = "Show List of Fields"
         Me.ShowFieldsCheckbox.UseVisualStyleBackColor = False
@@ -198,11 +198,11 @@ Partial Class SearchForm2
         '
         Me.Label4.AutoSize = True
         Me.Label4.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Label4.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(426, 332)
+        Me.Label4.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.Label4.Location = New System.Drawing.Point(453, 348)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(102, 14)
+        Me.Label4.Size = New System.Drawing.Size(93, 14)
         Me.Label4.TabIndex = 13
         Me.Label4.Text = "Last Object Type"
         '
@@ -210,9 +210,9 @@ Partial Class SearchForm2
         '
         Me.LastObjectTypeTextBox.BackColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.LastObjectTypeTextBox.Enabled = False
-        Me.LastObjectTypeTextBox.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LastObjectTypeTextBox.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.LastObjectTypeTextBox.Location = New System.Drawing.Point(521, 325)
+        Me.LastObjectTypeTextBox.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LastObjectTypeTextBox.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.LastObjectTypeTextBox.Location = New System.Drawing.Point(572, 344)
         Me.LastObjectTypeTextBox.Name = "LastObjectTypeTextBox"
         Me.LastObjectTypeTextBox.Size = New System.Drawing.Size(123, 22)
         Me.LastObjectTypeTextBox.TabIndex = 12
@@ -220,11 +220,11 @@ Partial Class SearchForm2
         'SelectSecondButton
         '
         Me.SelectSecondButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.SelectSecondButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.SelectSecondButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.SelectSecondButton.Location = New System.Drawing.Point(28, 83)
+        Me.SelectSecondButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SelectSecondButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.SelectSecondButton.Location = New System.Drawing.Point(28, 90)
         Me.SelectSecondButton.Name = "SelectSecondButton"
-        Me.SelectSecondButton.Size = New System.Drawing.Size(72, 20)
+        Me.SelectSecondButton.Size = New System.Drawing.Size(72, 30)
         Me.SelectSecondButton.TabIndex = 14
         Me.SelectSecondButton.Text = "Select 2nd"
         Me.SelectSecondButton.UseVisualStyleBackColor = False
@@ -234,11 +234,11 @@ Partial Class SearchForm2
         Me.OpenObjectCheckbox.AutoSize = True
         Me.OpenObjectCheckbox.BackColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.OpenObjectCheckbox.Enabled = False
-        Me.OpenObjectCheckbox.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.OpenObjectCheckbox.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.OpenObjectCheckbox.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OpenObjectCheckbox.ForeColor = System.Drawing.SystemColors.ControlLight
         Me.OpenObjectCheckbox.Location = New System.Drawing.Point(533, 211)
         Me.OpenObjectCheckbox.Name = "OpenObjectCheckbox"
-        Me.OpenObjectCheckbox.Size = New System.Drawing.Size(97, 18)
+        Me.OpenObjectCheckbox.Size = New System.Drawing.Size(92, 18)
         Me.OpenObjectCheckbox.TabIndex = 15
         Me.OpenObjectCheckbox.Text = "Open Object"
         Me.OpenObjectCheckbox.UseVisualStyleBackColor = False
@@ -246,11 +246,11 @@ Partial Class SearchForm2
         'Select3rdButton
         '
         Me.Select3rdButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Select3rdButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Select3rdButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Select3rdButton.Location = New System.Drawing.Point(28, 102)
+        Me.Select3rdButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Select3rdButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.Select3rdButton.Location = New System.Drawing.Point(28, 117)
         Me.Select3rdButton.Name = "Select3rdButton"
-        Me.Select3rdButton.Size = New System.Drawing.Size(72, 20)
+        Me.Select3rdButton.Size = New System.Drawing.Size(72, 30)
         Me.Select3rdButton.TabIndex = 16
         Me.Select3rdButton.Text = "Select 3rd"
         Me.Select3rdButton.UseVisualStyleBackColor = False
@@ -258,11 +258,11 @@ Partial Class SearchForm2
         'Select4thButton
         '
         Me.Select4thButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Select4thButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Select4thButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Select4thButton.Location = New System.Drawing.Point(28, 121)
+        Me.Select4thButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Select4thButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.Select4thButton.Location = New System.Drawing.Point(28, 144)
         Me.Select4thButton.Name = "Select4thButton"
-        Me.Select4thButton.Size = New System.Drawing.Size(72, 20)
+        Me.Select4thButton.Size = New System.Drawing.Size(72, 30)
         Me.Select4thButton.TabIndex = 17
         Me.Select4thButton.Text = "Select 4th"
         Me.Select4thButton.UseVisualStyleBackColor = False
@@ -270,11 +270,11 @@ Partial Class SearchForm2
         'Select5thButton
         '
         Me.Select5thButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Select5thButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Select5thButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Select5thButton.Location = New System.Drawing.Point(28, 140)
+        Me.Select5thButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Select5thButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.Select5thButton.Location = New System.Drawing.Point(28, 171)
         Me.Select5thButton.Name = "Select5thButton"
-        Me.Select5thButton.Size = New System.Drawing.Size(72, 20)
+        Me.Select5thButton.Size = New System.Drawing.Size(72, 30)
         Me.Select5thButton.TabIndex = 18
         Me.Select5thButton.Text = "Select 5th"
         Me.Select5thButton.UseVisualStyleBackColor = False
@@ -282,11 +282,11 @@ Partial Class SearchForm2
         'Select6thButton
         '
         Me.Select6thButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Select6thButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Select6thButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Select6thButton.Location = New System.Drawing.Point(28, 160)
+        Me.Select6thButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Select6thButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.Select6thButton.Location = New System.Drawing.Point(28, 199)
         Me.Select6thButton.Name = "Select6thButton"
-        Me.Select6thButton.Size = New System.Drawing.Size(72, 20)
+        Me.Select6thButton.Size = New System.Drawing.Size(72, 30)
         Me.Select6thButton.TabIndex = 19
         Me.Select6thButton.Text = "Select 6th"
         Me.Select6thButton.UseVisualStyleBackColor = False
@@ -294,11 +294,11 @@ Partial Class SearchForm2
         'Select7thButton
         '
         Me.Select7thButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Select7thButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Select7thButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Select7thButton.Location = New System.Drawing.Point(28, 179)
+        Me.Select7thButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Select7thButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.Select7thButton.Location = New System.Drawing.Point(28, 226)
         Me.Select7thButton.Name = "Select7thButton"
-        Me.Select7thButton.Size = New System.Drawing.Size(72, 20)
+        Me.Select7thButton.Size = New System.Drawing.Size(72, 30)
         Me.Select7thButton.TabIndex = 20
         Me.Select7thButton.Text = "Select 7th"
         Me.Select7thButton.UseVisualStyleBackColor = False
@@ -306,11 +306,11 @@ Partial Class SearchForm2
         'Select8thButton
         '
         Me.Select8thButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Select8thButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Select8thButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Select8thButton.Location = New System.Drawing.Point(28, 199)
+        Me.Select8thButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Select8thButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.Select8thButton.Location = New System.Drawing.Point(28, 254)
         Me.Select8thButton.Name = "Select8thButton"
-        Me.Select8thButton.Size = New System.Drawing.Size(72, 20)
+        Me.Select8thButton.Size = New System.Drawing.Size(72, 30)
         Me.Select8thButton.TabIndex = 21
         Me.Select8thButton.Text = "Select 8th"
         Me.Select8thButton.UseVisualStyleBackColor = False
@@ -318,11 +318,11 @@ Partial Class SearchForm2
         'Select9thButton
         '
         Me.Select9thButton.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.Select9thButton.Font = New System.Drawing.Font("Tahoma", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Select9thButton.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Select9thButton.Location = New System.Drawing.Point(28, 219)
+        Me.Select9thButton.Font = New System.Drawing.Font("Calibri", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Select9thButton.ForeColor = System.Drawing.SystemColors.ControlLight
+        Me.Select9thButton.Location = New System.Drawing.Point(28, 282)
         Me.Select9thButton.Name = "Select9thButton"
-        Me.Select9thButton.Size = New System.Drawing.Size(72, 20)
+        Me.Select9thButton.Size = New System.Drawing.Size(72, 30)
         Me.Select9thButton.TabIndex = 22
         Me.Select9thButton.Text = "Select 9th"
         Me.Select9thButton.UseVisualStyleBackColor = False
@@ -332,7 +332,7 @@ Partial Class SearchForm2
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.SystemColors.ActiveCaptionText
-        Me.ClientSize = New System.Drawing.Size(659, 358)
+        Me.ClientSize = New System.Drawing.Size(709, 378)
         Me.Controls.Add(Me.Select9thButton)
         Me.Controls.Add(Me.Select8thButton)
         Me.Controls.Add(Me.Select7thButton)
