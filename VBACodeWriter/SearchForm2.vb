@@ -6,6 +6,15 @@
     Private AccessInstance As Microsoft.Office.Interop.Access.Application
     Private StringDatabaseFilename As String
     Private ObjectSetting As New ObjectSettings
+    Private WithEvents AddErrorHandlerButton As System.Windows.Forms.Button
+    Private WithEvents SelectProcedureButton As System.Windows.Forms.Button
+    Private blnSelectProcedureRequested As Boolean
+
+    Public ReadOnly Property SelectProcedureRequested() As Boolean
+        Get
+            Return blnSelectProcedureRequested
+        End Get
+    End Property
 
     Public Property ObjectSetting1() As ObjectSettings
         Get
@@ -67,7 +76,46 @@
         varArray = Nothing
     End Sub
 
+    Private Sub UpdateProcedureActionVisibility()
+        Dim blnVisible As Boolean = (strObjectType = "Procedure" Or strObjectType = "AllProcedure")
+        If AddErrorHandlerButton IsNot Nothing Then
+            AddErrorHandlerButton.Visible = blnVisible
+            AddErrorHandlerButton.Enabled = blnVisible AndAlso Me.ObjectsListbox.SelectedIndex >= 0
+        End If
+        If SelectProcedureButton IsNot Nothing Then
+            SelectProcedureButton.Visible = blnVisible
+            SelectProcedureButton.Enabled = blnVisible AndAlso Me.ObjectsListbox.SelectedIndex >= 0
+        End If
+    End Sub
+
     Private Sub SearchForm2_Load(sender As Object, e As EventArgs) Handles Me.Load
+        If AddErrorHandlerButton Is Nothing Then
+            AddErrorHandlerButton = New System.Windows.Forms.Button()
+            AddErrorHandlerButton.Text = "Add Error Handler"
+            AddErrorHandlerButton.Size = New System.Drawing.Size(152, 36)
+            AddErrorHandlerButton.Location = New System.Drawing.Point(711, 340)
+            AddErrorHandlerButton.BackColor = System.Drawing.SystemColors.Highlight
+            AddErrorHandlerButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+            AddErrorHandlerButton.ForeColor = System.Drawing.Color.White
+            Me.Controls.Add(AddErrorHandlerButton)
+            AddHandler AddErrorHandlerButton.Click, AddressOf AddErrorHandlerButton_Click
+        End If
+        If SelectProcedureButton Is Nothing Then
+            SelectProcedureButton = New System.Windows.Forms.Button()
+            SelectProcedureButton.Text = "Select Procedure"
+            SelectProcedureButton.Size = New System.Drawing.Size(152, 36)
+            SelectProcedureButton.Location = New System.Drawing.Point(711, 385)
+            SelectProcedureButton.BackColor = System.Drawing.SystemColors.Highlight
+            SelectProcedureButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+            SelectProcedureButton.ForeColor = System.Drawing.Color.White
+            Me.Controls.Add(SelectProcedureButton)
+            AddHandler SelectProcedureButton.Click, AddressOf SelectProcedureButton_Click
+        End If
+        AddErrorHandlerButton.Visible = False
+        AddErrorHandlerButton.Enabled = False
+        SelectProcedureButton.Visible = False
+        SelectProcedureButton.Enabled = False
+
         Dim aob As Microsoft.Office.Interop.Access.AccessObject 'This crashes when you use the full object don't know why
         Dim Table As Microsoft.Office.Interop.Access.Dao.TableDef
         Dim query As Microsoft.Office.Interop.Access.Dao.QueryDef
@@ -219,6 +267,7 @@
                 Me.ObjectsListbox.Items.Add(varArray(i))
             End If
         Next
+        UpdateProcedureActionVisibility()
         Me.Text = "Search for " & strObjectType
         Me.SearchTextBox.Focus()
 
@@ -318,6 +367,123 @@ ErrorHandler:
         End If
     End Sub
 
+    Private Sub SelectProcedureButton_Click(sender As Object, e As EventArgs) Handles SelectProcedureButton.Click
+        If Me.ObjectsListbox.SelectedIndex < 0 Then Exit Sub
+
+        Dim procedureName As String = Trim(Me.ObjectsListbox.Text)
+        If Len(procedureName) = 0 Then Exit Sub
+        blnSelectProcedureRequested = True
+        Me.Close()
+    End Sub
+
+    Private Function ResolveSelectedProcedure(ByRef moduleName As String, ByRef procedureName As String) As Boolean
+        Dim selectedText As String = Trim(Me.ObjectsListbox.Text)
+        moduleName = ""
+        procedureName = ""
+
+        If Len(selectedText) = 0 Then Return False
+
+        If strObjectType = "AllProcedure" Then
+            Dim dotPos As Integer = InStr(selectedText, ".")
+            If dotPos <= 1 Then Return False
+            moduleName = Microsoft.VisualBasic.Left(selectedText, dotPos - 1)
+            procedureName = Mid(selectedText, dotPos + 1)
+        Else
+            procedureName = selectedText
+            moduleName = AccessInstance.VBE.ActiveCodePane.CodeModule.Name
+        End If
+
+        Return Len(moduleName) > 0 AndAlso Len(procedureName) > 0
+    End Function
+
+    Private Function GetProcedureEndLine(ByVal CM As Object, ByVal procStartLine As Integer, ByVal procCount As Integer) As Integer
+        Dim i As Integer
+        For i = procStartLine + procCount - 1 To procStartLine Step -1
+            Dim lineText As String = UCase(Trim(CStr(CM.Lines(i, 1))))
+            If lineText = "END SUB" OrElse lineText = "END FUNCTION" Then
+                Return i
+            End If
+        Next
+
+        Return procStartLine + procCount - 1
+    End Function
+
+    Private Sub AddErrorHandlerButton_Click(sender As Object, e As EventArgs) Handles AddErrorHandlerButton.Click
+        If Me.ObjectsListbox.SelectedIndex < 0 Then
+            MessageBox.Show("Select a procedure before adding an error handler.", "Procedure Required", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Dim moduleName As String = ""
+        Dim procedureName As String = ""
+        If Not ResolveSelectedProcedure(moduleName, procedureName) Then
+            MessageBox.Show("Select a procedure before adding an error handler.", "Procedure Required", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            Exit Sub
+        End If
+
+        Try
+            If AccessInstance.VBE.ActiveCodePane.CodeModule.Name <> moduleName Then
+                AccessInstance.DoCmd.OpenModule(moduleName)
+            End If
+
+            Dim CM As Object = AccessInstance.VBE.ActiveCodePane.CodeModule
+            Dim procStartLine As Integer = CM.ProcStartLine(procedureName, Microsoft.Vbe.Interop.vbext_ProcKind.vbext_pk_Proc)
+            Dim procCount As Integer = CM.ProcCountLines(procedureName, Microsoft.Vbe.Interop.vbext_ProcKind.vbext_pk_Proc)
+
+            If procStartLine <= 0 Or procCount <= 0 Then
+                MessageBox.Show("The selected procedure could not be found in the active module.", "Procedure Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Exit Sub
+            End If
+
+            Dim procEndLine As Integer = GetProcedureEndLine(CM, procStartLine, procCount)
+            Dim hasHandler As Boolean = False
+            Dim i As Integer
+
+            For i = procStartLine To procEndLine
+                Dim lineText As String = Trim(CStr(CM.Lines(i, 1)))
+                If Upper(lineText) = "ON ERROR GOTO HANDLEERROR" OrElse Upper(lineText) = "HANDLEERROR:" Then
+                    hasHandler = True
+                    Exit For
+                End If
+            Next
+
+            If hasHandler Then
+                ' MessageBox.Show("This procedure already contains an error handler.", "Error Handler Exists", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Exit Sub
+            End If
+
+            Dim firstLine As String = Trim(CStr(CM.Lines(procStartLine, 1)))
+            Dim isFunction As Boolean = InStr(1, UCase(firstLine), "FUNCTION", vbTextCompare) > 0
+            Dim exitStatement As String = IIf(isFunction, "Exit Function", "Exit Sub")
+            Dim literalProcedureName As String = """" & procedureName & """"
+
+            CM.InsertLines(procStartLine + 1, "    On Error GoTo HandleError")
+
+            Dim insertText As String = _
+                "ExitHere:" & vbCrLf & _
+                "    " & exitStatement & vbCrLf & vbCrLf & _
+                "HandleError:" & vbCrLf & _
+                "    Select Case Err.Number" & vbCrLf & _
+                "    ' Case 9" & vbCrLf & _
+                "       'Do Something" & vbCrLf & _
+                "       'Resume ExitHere" & vbCrLf & _
+                "    Case Else" & vbCrLf & _
+                "        MsgBox ""Unexpected Error:"" _" & vbCrLf & _
+                "            & vbCrLf & ""Error "" & Err.Number & "" "" & Err.Description _" & vbCrLf & _
+                "            & "" in procedure "" & " & literalProcedureName & " _" & vbCrLf & _
+                "            , vbCritical, ""Please Investigate""" & vbCrLf & _
+                "        Resume ExitHere" & vbCrLf & _
+                "        Resume 'For Debug Only" & vbCrLf & _
+                "    End Select"
+
+            CM.InsertLines(procEndLine + 1, vbCrLf & insertText)
+
+            Me.Visible = False
+        Catch ex As Exception
+            MessageBox.Show("Unable to insert the error handler: " & ex.Message, "Insert Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+    End Sub
+
     Private Sub ObjectsListbox_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ObjectsListbox.SelectedIndexChanged
         If Me.ObjectsListbox.Items.Count = 0 Then Exit Sub
         If Len(Me.ObjectsListbox.Text) > 0 Then
@@ -326,6 +492,7 @@ ErrorHandler:
         Else
             Me.OkayButton.Enabled = False
         End If
+        UpdateProcedureActionVisibility()
     End Sub
 
     Private Sub SelectSecondButton_Click(sender As Object, e As EventArgs) Handles SelectSecondButton.Click

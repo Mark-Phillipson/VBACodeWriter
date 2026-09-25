@@ -197,6 +197,10 @@ Public Class Connect
         searchForm.ObjectSetting1 = ObjectSetting
 
         searchForm.ShowDialog()
+        If searchForm.SelectProcedureRequested Then
+            SelectProcedureInCodePane(searchForm.ObjectType, searchForm.ObjectsListbox.Text, stringModuleName)
+            Exit Sub
+        End If
         If searchForm.ObjectType = "Procedure" And searchForm.InsertIntoCodeCheckbox.Checked = False And stringModuleName.Length > 0 Then
             applicationObject.DoCmd.OpenModule(stringModuleName, searchForm.ObjectsListbox.Text)
         End If
@@ -241,6 +245,37 @@ Public Class Connect
         'searchForm.Close()
         'searchForm = Nothing
 
+    End Sub
+
+    Private Sub SelectProcedureInCodePane(ByVal objectType As String, ByVal selectedText As String, ByVal stringModuleName As String)
+        If Len(Trim(selectedText)) = 0 Then Exit Sub
+
+        Dim moduleName As String = ""
+        Dim procedureName As String = ""
+
+        If objectType = "AllProcedure" Then
+            Dim dotPos As Integer = InStr(selectedText, ".")
+            If dotPos <= 1 Then Exit Sub
+            moduleName = Left(selectedText, dotPos - 1)
+            procedureName = Mid(selectedText, dotPos + 1)
+        Else
+            moduleName = stringModuleName
+            procedureName = selectedText
+        End If
+
+        If Len(moduleName) = 0 Or Len(procedureName) = 0 Then Exit Sub
+
+        applicationObject.DoCmd.OpenModule(moduleName)
+
+        Dim CM As Object = applicationObject.VBE.ActiveCodePane.CodeModule
+        Dim procStartLine As Integer = CM.ProcStartLine(procedureName, Microsoft.Vbe.Interop.vbext_ProcKind.vbext_pk_Proc)
+        Dim procCount As Integer = CM.ProcCountLines(procedureName, Microsoft.Vbe.Interop.vbext_ProcKind.vbext_pk_Proc)
+
+        If procStartLine > 0 AndAlso procCount > 0 Then
+            Dim procEndLine As Integer = procStartLine + procCount - 1
+            Dim endColumn As Integer = Len(CStr(CM.Lines(procEndLine, 1))) + 1
+            applicationObject.VBE.ActiveCodePane.SetSelection(procStartLine, 1, procEndLine, endColumn)
+        End If
     End Sub
 
     Public Sub Listreports(ByVal BooleanVBA As Boolean)
