@@ -22,6 +22,7 @@ Partial Class SearchForm2
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(SearchForm2))
         Me.SearchTextBox = New System.Windows.Forms.TextBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -50,12 +51,12 @@ Partial Class SearchForm2
         'SearchTextBox
         '
         Me.SearchTextBox.BackColor = System.Drawing.Color.FromArgb(CType(CType(38, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(38, Byte), Integer))
-        Me.SearchTextBox.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SearchTextBox.Font = New System.Drawing.Font("Calibri", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SearchTextBox.ForeColor = System.Drawing.Color.White
         Me.SearchTextBox.Location = New System.Drawing.Point(141, 39)
-        Me.SearchTextBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SearchTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.SearchTextBox.Name = "SearchTextBox"
-        Me.SearchTextBox.Size = New System.Drawing.Size(543, 26)
+        Me.SearchTextBox.Size = New System.Drawing.Size(543, 31)
         Me.SearchTextBox.TabIndex = 0
         '
         'Label1
@@ -92,7 +93,7 @@ Partial Class SearchForm2
         Me.ObjectsListbox.FormattingEnabled = True
         Me.ObjectsListbox.ItemHeight = 38
         Me.ObjectsListbox.Location = New System.Drawing.Point(140, 90)
-        Me.ObjectsListbox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ObjectsListbox.Margin = New System.Windows.Forms.Padding(4)
         Me.ObjectsListbox.Name = "ObjectsListbox"
         Me.ObjectsListbox.Size = New System.Drawing.Size(545, 346)
         Me.ObjectsListbox.TabIndex = 3
@@ -104,7 +105,7 @@ Partial Class SearchForm2
         Me.SelectTopButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SelectTopButton.ForeColor = System.Drawing.Color.White
         Me.SelectTopButton.Location = New System.Drawing.Point(37, 87)
-        Me.SelectTopButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SelectTopButton.Margin = New System.Windows.Forms.Padding(4)
         Me.SelectTopButton.Name = "SelectTopButton"
         Me.SelectTopButton.Size = New System.Drawing.Size(96, 42)
         Me.SelectTopButton.TabIndex = 4
@@ -115,14 +116,14 @@ Partial Class SearchForm2
         '
         Me.OkayButton.BackColor = System.Drawing.SystemColors.Highlight
         Me.OkayButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.OkayButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.OkayButton.Font = New System.Drawing.Font("Calibri", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.OkayButton.ForeColor = System.Drawing.Color.White
         Me.OkayButton.Location = New System.Drawing.Point(711, 36)
-        Me.OkayButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OkayButton.Margin = New System.Windows.Forms.Padding(4)
         Me.OkayButton.Name = "OkayButton"
         Me.OkayButton.Size = New System.Drawing.Size(152, 36)
         Me.OkayButton.TabIndex = 5
-        Me.OkayButton.Text = "&Okay"
+        Me.OkayButton.Text = "&OK"
         Me.OkayButton.UseVisualStyleBackColor = False
         '
         'DoCanceButton
@@ -133,7 +134,7 @@ Partial Class SearchForm2
         Me.DoCanceButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DoCanceButton.ForeColor = System.Drawing.Color.White
         Me.DoCanceButton.Location = New System.Drawing.Point(711, 91)
-        Me.DoCanceButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.DoCanceButton.Margin = New System.Windows.Forms.Padding(4)
         Me.DoCanceButton.Name = "DoCanceButton"
         Me.DoCanceButton.Size = New System.Drawing.Size(152, 36)
         Me.DoCanceButton.TabIndex = 6
@@ -149,7 +150,7 @@ Partial Class SearchForm2
         Me.InsertIntoCodeCheckbox.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.InsertIntoCodeCheckbox.ForeColor = System.Drawing.Color.White
         Me.InsertIntoCodeCheckbox.Location = New System.Drawing.Point(711, 151)
-        Me.InsertIntoCodeCheckbox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.InsertIntoCodeCheckbox.Margin = New System.Windows.Forms.Padding(4)
         Me.InsertIntoCodeCheckbox.Name = "InsertIntoCodeCheckbox"
         Me.InsertIntoCodeCheckbox.Size = New System.Drawing.Size(126, 22)
         Me.InsertIntoCodeCheckbox.TabIndex = 7
@@ -163,7 +164,7 @@ Partial Class SearchForm2
         Me.PlaceinClipboardCheckbox.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.PlaceinClipboardCheckbox.ForeColor = System.Drawing.Color.White
         Me.PlaceinClipboardCheckbox.Location = New System.Drawing.Point(711, 198)
-        Me.PlaceinClipboardCheckbox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PlaceinClipboardCheckbox.Margin = New System.Windows.Forms.Padding(4)
         Me.PlaceinClipboardCheckbox.Name = "PlaceinClipboardCheckbox"
         Me.PlaceinClipboardCheckbox.Size = New System.Drawing.Size(138, 22)
         Me.PlaceinClipboardCheckbox.TabIndex = 8
@@ -177,7 +178,7 @@ Partial Class SearchForm2
         Me.TableQueryTextBox.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TableQueryTextBox.ForeColor = System.Drawing.Color.White
         Me.TableQueryTextBox.Location = New System.Drawing.Point(171, 475)
-        Me.TableQueryTextBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableQueryTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.TableQueryTextBox.Name = "TableQueryTextBox"
         Me.TableQueryTextBox.Size = New System.Drawing.Size(419, 26)
         Me.TableQueryTextBox.TabIndex = 9
@@ -203,7 +204,7 @@ Partial Class SearchForm2
         Me.ShowFieldsCheckbox.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ShowFieldsCheckbox.ForeColor = System.Drawing.Color.White
         Me.ShowFieldsCheckbox.Location = New System.Drawing.Point(711, 245)
-        Me.ShowFieldsCheckbox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.ShowFieldsCheckbox.Margin = New System.Windows.Forms.Padding(4)
         Me.ShowFieldsCheckbox.Name = "ShowFieldsCheckbox"
         Me.ShowFieldsCheckbox.Size = New System.Drawing.Size(141, 22)
         Me.ShowFieldsCheckbox.TabIndex = 11
@@ -230,7 +231,7 @@ Partial Class SearchForm2
         Me.LastObjectTypeTextBox.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LastObjectTypeTextBox.ForeColor = System.Drawing.Color.White
         Me.LastObjectTypeTextBox.Location = New System.Drawing.Point(763, 476)
-        Me.LastObjectTypeTextBox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.LastObjectTypeTextBox.Margin = New System.Windows.Forms.Padding(4)
         Me.LastObjectTypeTextBox.Name = "LastObjectTypeTextBox"
         Me.LastObjectTypeTextBox.Size = New System.Drawing.Size(163, 26)
         Me.LastObjectTypeTextBox.TabIndex = 12
@@ -242,7 +243,7 @@ Partial Class SearchForm2
         Me.SelectSecondButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SelectSecondButton.ForeColor = System.Drawing.Color.White
         Me.SelectSecondButton.Location = New System.Drawing.Point(37, 125)
-        Me.SelectSecondButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.SelectSecondButton.Margin = New System.Windows.Forms.Padding(4)
         Me.SelectSecondButton.Name = "SelectSecondButton"
         Me.SelectSecondButton.Size = New System.Drawing.Size(96, 42)
         Me.SelectSecondButton.TabIndex = 14
@@ -257,7 +258,7 @@ Partial Class SearchForm2
         Me.OpenObjectCheckbox.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.OpenObjectCheckbox.ForeColor = System.Drawing.Color.White
         Me.OpenObjectCheckbox.Location = New System.Drawing.Point(711, 292)
-        Me.OpenObjectCheckbox.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.OpenObjectCheckbox.Margin = New System.Windows.Forms.Padding(4)
         Me.OpenObjectCheckbox.Name = "OpenObjectCheckbox"
         Me.OpenObjectCheckbox.Size = New System.Drawing.Size(105, 22)
         Me.OpenObjectCheckbox.TabIndex = 15
@@ -271,7 +272,7 @@ Partial Class SearchForm2
         Me.Select3rdButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Select3rdButton.ForeColor = System.Drawing.Color.White
         Me.Select3rdButton.Location = New System.Drawing.Point(37, 162)
-        Me.Select3rdButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Select3rdButton.Margin = New System.Windows.Forms.Padding(4)
         Me.Select3rdButton.Name = "Select3rdButton"
         Me.Select3rdButton.Size = New System.Drawing.Size(96, 42)
         Me.Select3rdButton.TabIndex = 16
@@ -285,7 +286,7 @@ Partial Class SearchForm2
         Me.Select4thButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Select4thButton.ForeColor = System.Drawing.Color.White
         Me.Select4thButton.Location = New System.Drawing.Point(37, 199)
-        Me.Select4thButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Select4thButton.Margin = New System.Windows.Forms.Padding(4)
         Me.Select4thButton.Name = "Select4thButton"
         Me.Select4thButton.Size = New System.Drawing.Size(96, 42)
         Me.Select4thButton.TabIndex = 17
@@ -299,7 +300,7 @@ Partial Class SearchForm2
         Me.Select5thButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Select5thButton.ForeColor = System.Drawing.Color.White
         Me.Select5thButton.Location = New System.Drawing.Point(37, 237)
-        Me.Select5thButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Select5thButton.Margin = New System.Windows.Forms.Padding(4)
         Me.Select5thButton.Name = "Select5thButton"
         Me.Select5thButton.Size = New System.Drawing.Size(96, 42)
         Me.Select5thButton.TabIndex = 18
@@ -313,7 +314,7 @@ Partial Class SearchForm2
         Me.Select6thButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Select6thButton.ForeColor = System.Drawing.Color.White
         Me.Select6thButton.Location = New System.Drawing.Point(37, 276)
-        Me.Select6thButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Select6thButton.Margin = New System.Windows.Forms.Padding(4)
         Me.Select6thButton.Name = "Select6thButton"
         Me.Select6thButton.Size = New System.Drawing.Size(96, 42)
         Me.Select6thButton.TabIndex = 19
@@ -327,7 +328,7 @@ Partial Class SearchForm2
         Me.Select7thButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Select7thButton.ForeColor = System.Drawing.Color.White
         Me.Select7thButton.Location = New System.Drawing.Point(37, 313)
-        Me.Select7thButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Select7thButton.Margin = New System.Windows.Forms.Padding(4)
         Me.Select7thButton.Name = "Select7thButton"
         Me.Select7thButton.Size = New System.Drawing.Size(96, 42)
         Me.Select7thButton.TabIndex = 20
@@ -341,7 +342,7 @@ Partial Class SearchForm2
         Me.Select8thButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Select8thButton.ForeColor = System.Drawing.Color.White
         Me.Select8thButton.Location = New System.Drawing.Point(37, 352)
-        Me.Select8thButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Select8thButton.Margin = New System.Windows.Forms.Padding(4)
         Me.Select8thButton.Name = "Select8thButton"
         Me.Select8thButton.Size = New System.Drawing.Size(96, 42)
         Me.Select8thButton.TabIndex = 21
@@ -355,7 +356,7 @@ Partial Class SearchForm2
         Me.Select9thButton.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Select9thButton.ForeColor = System.Drawing.Color.White
         Me.Select9thButton.Location = New System.Drawing.Point(37, 390)
-        Me.Select9thButton.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Select9thButton.Margin = New System.Windows.Forms.Padding(4)
         Me.Select9thButton.Name = "Select9thButton"
         Me.Select9thButton.Size = New System.Drawing.Size(96, 42)
         Me.Select9thButton.TabIndex = 22
@@ -393,7 +394,8 @@ Partial Class SearchForm2
         Me.Controls.Add(Me.SearchTextBox)
         Me.Font = New System.Drawing.Font("Calibri", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ForeColor = System.Drawing.Color.White
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "SearchForm2"
         Me.Text = "SearchForm2"
         Me.ResumeLayout(False)

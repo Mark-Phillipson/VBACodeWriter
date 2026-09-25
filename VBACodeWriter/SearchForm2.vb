@@ -408,6 +408,32 @@ ErrorHandler:
         Return procStartLine + procCount - 1
     End Function
 
+    Private Function GetProcedureDeclarationEndLine(ByVal CM As Object, ByVal procStartLine As Integer, ByVal procCount As Integer) As Integer
+        Dim i As Integer
+        Dim searchEnd As Integer = procStartLine + procCount - 1
+        If searchEnd > procStartLine + 20 Then
+            searchEnd = procStartLine + 20
+        End If
+
+        Dim declStart As Integer = procStartLine
+        For i = procStartLine To searchEnd
+            Dim lineText As String = UCase(Trim(CStr(CM.Lines(i, 1))))
+            If lineText Like "* SUB *" OrElse lineText Like "* FUNCTION *" Then
+                declStart = i
+                Exit For
+            End If
+        Next
+
+        Dim declEnd As Integer = declStart
+        Do While declEnd < searchEnd
+            Dim currentLine As String = Trim(CStr(CM.Lines(declEnd, 1)))
+            If Not currentLine.EndsWith("_") Then Exit Do
+            declEnd = declEnd + 1
+        Loop
+
+        Return declEnd
+    End Function
+
     Private Sub AddErrorHandlerButton_Click(sender As Object, e As EventArgs) Handles AddErrorHandlerButton.Click
         If Me.ObjectsListbox.SelectedIndex < 0 Then
             MessageBox.Show("Select a procedure before adding an error handler.", "Procedure Required", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -441,7 +467,7 @@ ErrorHandler:
 
             For i = procStartLine To procEndLine
                 Dim lineText As String = Trim(CStr(CM.Lines(i, 1)))
-                If Upper(lineText) = "ON ERROR GOTO HANDLEERROR" OrElse Upper(lineText) = "HANDLEERROR:" Then
+                If (lineText.ToUpper()) = "ON ERROR GOTO HANDLEERROR" OrElse lineText.ToUpper() = "HANDLEERROR:" Then
                     hasHandler = True
                     Exit For
                 End If
@@ -452,12 +478,13 @@ ErrorHandler:
                 Exit Sub
             End If
 
-            Dim firstLine As String = Trim(CStr(CM.Lines(procStartLine, 1)))
+            Dim declEndLine As Integer = GetProcedureDeclarationEndLine(CM, procStartLine, procCount)
+            Dim firstLine As String = Trim(CStr(CM.Lines(declEndLine, 1)))
             Dim isFunction As Boolean = InStr(1, UCase(firstLine), "FUNCTION", vbTextCompare) > 0
             Dim exitStatement As String = IIf(isFunction, "Exit Function", "Exit Sub")
             Dim literalProcedureName As String = """" & procedureName & """"
 
-            CM.InsertLines(procStartLine + 1, "    On Error GoTo HandleError")
+            CM.InsertLines(declEndLine + 1, "    On Error GoTo HandleError")
 
             Dim insertText As String = _
                 "ExitHere:" & vbCrLf & _
