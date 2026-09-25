@@ -7,7 +7,7 @@ Public Class FormParseSQL
     Private Function FormatSQLForEmbeddedCode(ByVal BooleanDeclareVariable As Boolean) As String
 
 
-        Const intKEYWORDMAX As Short = 12
+        Const intKEYWORDMAX As Short = 47
         Const strLine As String = "    stringSQLText = stringSQLText & "
         Const intLINEUP As Short = 12
         Const strCRTEXT As String = " & vbCrLf"
@@ -19,8 +19,91 @@ Public Class FormParseSQL
         Dim strQ As String
         Dim lngEnd As Integer
         Dim strOut As String
+        Dim strPostKeyword As String
 
-        Dim strKeyWord(intKEYWORDMAX) As String
+        Dim strKeyWord() As String = {
+            "LEFT OUTER JOIN",
+            "RIGHT OUTER JOIN",
+            "FULL OUTER JOIN",
+            "INNER JOIN",
+            "LEFT JOIN",
+            "RIGHT JOIN",
+            "FULL JOIN",
+            "CROSS JOIN",
+            "OUTER APPLY",
+            "CROSS APPLY",
+            "SELECT",
+            "INSERT",
+            "UPDATE",
+            "DELETE",
+            "MERGE",
+            "FROM",
+            "WHERE",
+            "GROUP BY",
+            "ORDER BY",
+            "HAVING",
+            "ON",
+            "JOIN",
+            "UNION",
+            "UNION ALL",
+            "INTERSECT",
+            "EXCEPT",
+            "CASE",
+            "WHEN",
+            "THEN",
+            "ELSE",
+            "END",
+            "AS",
+            "DISTINCT",
+            "TOP",
+            "INTO",
+            "VALUES",
+            "SET",
+            "IN",
+            "LIKE",
+            "BETWEEN",
+            "IS",
+            "NOT",
+            "NULL",
+            "EXISTS",
+            "ALL",
+            "ANY",
+            "SOME",
+            "WITH",
+            "OVER",
+            "PARTITION BY",
+            "WINDOW",
+            "RETURNING",
+            "DECLARE",
+            "BEGIN",
+            "END",
+            "IF",
+            "ELSEIF",
+            "WHILE",
+            "FOR",
+            "NEXT",
+            "TRUNCATE",
+            "BEGIN TRAN",
+            "COMMIT",
+            "ROLLBACK",
+            "ALTER",
+            "CREATE",
+            "DROP",
+            "RENAME",
+            "EXEC",
+            "EXECUTE",
+            "GO",
+            "PIVOT",
+            "UNPIVOT",
+            "MATCH",
+            "BY",
+            "THROW",
+            "TRY",
+            "CATCH",
+            "AND",
+            "OR",
+            ","
+        }
 
         ' Should do this by grabbing one word "Element" at a time delimited by
         'spaces or commas.  Then determine what the word is and break
@@ -33,18 +116,6 @@ Public Class FormParseSQL
         'Dim objCollection As System.Collections.IEnumerable = AccessInstance.CurrentProject.AllReports
         'DestroyComObject(objCollection)
         'DestroyComObject(DataBase)
-        strKeyWord(1) = "INNER JOIN"
-        strKeyWord(2) = "LEFT JOIN"
-        strKeyWord(3) = "RIGHT JOIN"
-        strKeyWord(4) = "WHERE"
-        strKeyWord(5) = "GROUP BY"
-        strKeyWord(6) = "ORDER BY"
-        strKeyWord(7) = "HAVING"
-        strKeyWord(8) = "ON"
-        strKeyWord(9) = "FROM"
-        strKeyWord(10) = ","
-        strKeyWord(11) = "AND"
-        strKeyWord(12) = "OR"
 
         strQ = Chr(34)
 
@@ -62,27 +133,58 @@ Public Class FormParseSQL
             intNoOfLines = 0
             Do Until lngChar > Len(strSQL)
                 blnkeyWord = False
-                For intKeyWord = 1 To intKEYWORDMAX
-                    If Mid(strSQL, lngChar, Len(strKeyWord(intKeyWord)) + 1) = (strKeyWord(intKeyWord) & " ") Then
+                For intKeyWord = 0 To strKeyWord.GetUpperBound(0)
+                    Dim strKW As String = strKeyWord(intKeyWord)
+                    If Len(strKW) = 0 Then Continue For
+
+                    Dim strCandidate As String = UCase$(Mid(strSQL, lngChar, Len(strKW)))
+                    Dim strKeywordUpper As String = UCase$(strKW)
+                    Dim strNextChar As String = ""
+                    Dim strPreviousChar As String = ""
+
+                    If lngChar + Len(strKW) <= Len(strSQL) Then
+                        strNextChar = Mid(strSQL, lngChar + Len(strKW), 1)
+                    End If
+                    If lngChar > 1 Then
+                        strPreviousChar = Mid(strSQL, lngChar - 1, 1)
+                    End If
+
+                    Dim blnPreviousBoundary As Boolean =
+                        lngChar = 1 OrElse
+                        strPreviousChar = " " OrElse
+                        strPreviousChar = vbTab OrElse
+                        strPreviousChar = vbCr OrElse
+                        strPreviousChar = vbLf OrElse
+                        strPreviousChar = "," OrElse
+                        strPreviousChar = ";" OrElse
+                        strPreviousChar = "(" OrElse
+                        strPreviousChar = ")"
+
+                    Dim blnNextBoundary As Boolean =
+                        lngChar + Len(strKW) > Len(strSQL) OrElse
+                        strNextChar = "" OrElse
+                        strNextChar = " " OrElse
+                        strNextChar = vbTab OrElse
+                        strNextChar = vbCr OrElse
+                        strNextChar = vbLf OrElse
+                        strNextChar = "," OrElse
+                        strNextChar = ";" OrElse
+                        strNextChar = "(" OrElse
+                        strNextChar = ")"
+
+                    If strCandidate = strKeywordUpper AndAlso blnPreviousBoundary AndAlso blnNextBoundary Then
                         blnkeyWord = True
-                        If intKeyWord = 8 Then
-                            blnkeyWord = Asc(Mid(strSQL, lngChar - 1, 1)) = 32
-                        End If
-                        If intKeyWord = 11 Then
-                            blnkeyWord = Asc(Mid(strSQL, lngChar - 1, 1)) = 32
-                        End If
-                        If intKeyWord = 12 Then
-                            blnkeyWord = Asc(Mid(strSQL, lngChar - 1, 1)) = 32
-                        End If
                         Exit For
                     End If
                 Next intKeyWord
                 If blnkeyWord Then
-                    strOut = strOut & strQ & strCRTEXT & vbCrLf & strLine & strQ & Space(intLINEUP - Len(strKeyWord(intKeyWord))) & strKeyWord(intKeyWord)
-                    lngChar = lngChar + Len(strKeyWord(intKeyWord))
+                    Dim strKeywordOut As String = strKeyWord(intKeyWord)
+                    Dim intPadding As Integer = Math.Max(1, intLINEUP - Len(strKeywordOut))
+                    strOut = strOut & strQ & strCRTEXT & vbCrLf & strLine & strQ & Space(intPadding) & strKeywordOut
+                    lngChar = lngChar + Len(strKeywordOut)
                     intNoOfLines = intNoOfLines + 1
-                    If Len(strLine & strQ & Space(intLINEUP - Len(strKeyWord(intKeyWord))) & strKeyWord(intKeyWord)) > intLongestLine Then
-                        intLongestLine = Len(strLine & strQ & Space(intLINEUP - Len(strKeyWord(intKeyWord))) & strKeyWord(intKeyWord))
+                    If Len(strLine & strQ & Space(intPadding) & strKeywordOut) > intLongestLine Then
+                        intLongestLine = Len(strLine & strQ & Space(intPadding) & strKeywordOut)
                     End If
                 ElseIf Asc(Mid(strSQL, lngChar, 1)) = 13 Or Asc(Mid(strSQL, lngChar, 1)) = 10 Then
                     lngChar = lngChar + 1
