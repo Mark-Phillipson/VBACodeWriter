@@ -32,11 +32,13 @@ Public Class Connect
     Private WithEvents MenuCommandListProcedures As Microsoft.Office.Core.CommandBarButton
     Private WithEvents MenuCommandListModules As Microsoft.Office.Core.CommandBarButton
     Private WithEvents MenuCommandListAllProcedures As Microsoft.Office.Core.CommandBarButton
+    Private WithEvents MenuCommandProcedureChat As Microsoft.Office.Core.CommandBarButton
+    Private procedureChat As ProcedureChatForm
     Private ObjectSetting As New ObjectSettings
 
 
     Public Sub OnBeginShutdown(ByRef custom As System.Array) Implements Extensibility.IDTExtensibility2.OnBeginShutdown
-
+        DisposeProcedureChat()
     End Sub
 
     Public Sub OnAddInsUpdate(ByRef custom As System.Array) Implements Extensibility.IDTExtensibility2.OnAddInsUpdate
@@ -56,6 +58,8 @@ Public Class Connect
     End Sub
 
     Public Sub OnDisconnection(ByVal RemoveMode As Extensibility.ext_DisconnectMode, ByRef custom As System.Array) Implements Extensibility.IDTExtensibility2.OnDisconnection
+        DisposeProcedureChat()
+        If Not MenuCommandProcedureChat Is Nothing Then MenuCommandProcedureChat.Delete() : DestroyComObject(MenuCommandProcedureChat)
         If Not MenuCommandControls Is Nothing Then MenuCommandControls.Delete() : DestroyComObject(MenuCommandControls)
         If Not MenuCommandDimensionVariable Is Nothing Then MenuCommandDimensionVariable.Delete() : DestroyComObject(MenuCommandDimensionVariable)
         If Not MenuCommandFields Is Nothing Then MenuCommandFields.Delete() : DestroyComObject(MenuCommandFields)
@@ -165,11 +169,33 @@ Public Class Connect
         MenuCommandListAllProcedures = CType(CommandBar, Microsoft.Office.Core.CommandBarButton)
 
         CommandBar = AddMenuCommand(CType(applicationObject.VBE.CommandBars("Menu Bar"), Microsoft.Office.Core.CommandBar),
+        addInInst, "Procedure Chat", "Procedure Chat", 0, "Procedure Chat")
+        MenuCommandProcedureChat = CType(CommandBar, Microsoft.Office.Core.CommandBarButton)
+
+        CommandBar = AddMenuCommand(CType(applicationObject.VBE.CommandBars("Menu Bar"), Microsoft.Office.Core.CommandBar),
         addInInst, "Comment Block", "Comment Block", 0, "Comment Block")
 
         CommandBar = AddMenuCommand(CType(applicationObject.VBE.CommandBars("Menu Bar"), Microsoft.Office.Core.CommandBar),
         addInInst, "UnComment Block", "UnComment Block", 0, "UnComment Block")
 
+    End Sub
+
+    Private Sub MenuCommandProcedureChat_Click(Ctrl As Microsoft.Office.Core.CommandBarButton, ByRef CancelDefault As Boolean) Handles MenuCommandProcedureChat.Click
+        Try
+            If procedureChat Is Nothing OrElse procedureChat.IsDisposed Then
+                procedureChat = New ProcedureChatForm(applicationObject)
+            End If
+            procedureChat.ShowSidebar()
+        Catch ex As Exception
+            DisposeProcedureChat()
+            MessageBox.Show("Unable to open Procedure Chat: " & ex.Message, "Procedure Chat", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End Try
+    End Sub
+
+    Private Sub DisposeProcedureChat()
+        If procedureChat Is Nothing Then Return
+        procedureChat.Dispose()
+        procedureChat = Nothing
     End Sub
 
     Public Sub ListForms(ByVal BooleanVBA As Boolean)
