@@ -365,9 +365,11 @@ Partial Class SearchForm2
         '
         'SearchForm2
         '
+        Me.AcceptButton = Me.OkayButton
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 18.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(12, Byte), Integer), CType(CType(12, Byte), Integer), CType(CType(12, Byte), Integer))
+        Me.CancelButton = Me.DoCanceButton
         Me.ClientSize = New System.Drawing.Size(945, 523)
         Me.Controls.Add(Me.Select9thButton)
         Me.Controls.Add(Me.Select8thButton)
@@ -396,6 +398,8 @@ Partial Class SearchForm2
         Me.ForeColor = System.Drawing.Color.White
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Margin = New System.Windows.Forms.Padding(4)
+        Me.MaximizeBox = False
+        Me.MinimizeBox = False
         Me.Name = "SearchForm2"
         Me.Text = "SearchForm2"
         Me.ResumeLayout(False)
