@@ -17,7 +17,7 @@ The add-in adds a **VBA Code Writer** menu to the Access VBA editor (VBE) with t
 - **List Variables** 🧠 - list variables visible in the active procedure/module declarations.
 - **Dimension Variable** 📝 - inserts a `Dim` statement for a selected variable name using naming-prefix inference (for example `str* -> As String`, `lng* -> As Long`, `rs* -> As DAO.Recordset`).
 - **List Procedures** 🧭 - list procedures in the active module.
-- **List Modules** 📦 - list modules and open one, then list its procedures.
+- **List Modules** 📦 - list modules, then optionally drill down into procedures for the selected module.
 - **List All Procedures** 🌍 - list procedures across all modules in `Module.Procedure` format.
 - **Parse SQL** 🧪 - formats SQL text into VBA-ready string-building code and can insert it directly into the active module.
 - **Add Error Handler** 🛡️ - inserts a standard VBA error-handling block for the selected procedure, with support for both `Sub` and `Function` procedures.
@@ -35,6 +35,8 @@ Most commands open the same search dialog where you can:
 - Copy the selected value to clipboard.
 - Open the selected object when relevant (used for modules/all procedures).
 - For tables/queries, optionally continue to a field list.
+- Use a contextual **Drill Down** button when listing forms/reports/tables/queries to open controls/fields immediately for the selected item.
+- When listing modules, use **Drill Down** to open procedures for the selected module.
 - Use quick-select buttons (**Select Top**, **Select 2nd** ... **Select 9th**) to jump to common results.
 - For procedure work, add an error handler or select the full procedure directly from the search form.
 
@@ -45,8 +47,11 @@ Most commands open the same search dialog where you can:
 3. Choose a command (for example **List Tables** or **List Procedures**).
 4. In the search form, type to filter and select an item.
 5. Keep **Insert Into Code** checked to paste into code at the current cursor position, or use clipboard/open options as needed.
-6. For object drill-down, run **List Tables** or **List Queries** and enable **Show List of Fields**.
-7. For procedure cleanup, select a procedure and use **Add Error Handler** or **Select Procedure**.
+6. For object drill-down, either:
+   - run **List Tables** or **List Queries** and enable **Show List of Fields**, or
+   - click the contextual **Drill Down** button after selecting a table/query/form/report to jump directly to fields/controls.
+7. For module-to-procedure navigation, run **List Modules**, select a module, and click **Drill Down** to open that module's procedures.
+8. For procedure cleanup, select a procedure and use **Add Error Handler** or **Select Procedure**.
 
 ## 🧪 Parse SQL workflow
 

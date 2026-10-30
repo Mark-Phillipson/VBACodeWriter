@@ -227,6 +227,35 @@ Public Class Connect
             SelectProcedureInCodePane(searchForm.ObjectType, searchForm.ObjectsListbox.Text, stringModuleName)
             Exit Sub
         End If
+        If searchForm.DrillDownRequested Then
+            Dim stringSelectedObjectName As String = searchForm.GetObjectName
+            If Len(Trim(stringSelectedObjectName)) = 0 Then Exit Sub
+
+            ObjectSetting.SetObjectName(stringSelectedObjectName)
+
+            If searchForm.DrillDownTargetObjectType = "Procedure" Then
+                applicationObject.DoCmd.OpenModule(stringSelectedObjectName)
+                ObjectSetting.SetOriginalModule(stringSelectedObjectName)
+                ListProcedures()
+                Exit Sub
+            End If
+
+            Dim drillDownForm As New SearchForm2
+            drillDownForm.SetObjectName(stringSelectedObjectName)
+            drillDownForm.SetObjectType(searchForm.DrillDownTargetObjectType)
+
+            If searchForm.DrillDownTargetObjectType = "Field" Then
+                ObjectSetting.SetObjectType(searchForm.ObjectType)
+                ObjectSetting.LastTableorQueryObjectType = searchForm.ObjectType
+            ElseIf searchForm.DrillDownTargetObjectType = "Control" Then
+                ObjectSetting.SetObjectType(searchForm.ObjectType)
+                ObjectSetting.SetFormOrReport(searchForm.ObjectType)
+                drillDownForm.SetFormOrReport(searchForm.ObjectType)
+            End If
+
+            ShowSearchForm(BooleanVBA, drillDownForm)
+            Exit Sub
+        End If
         If searchForm.ObjectType = "Procedure" And searchForm.InsertIntoCodeCheckbox.Checked = False And stringModuleName.Length > 0 Then
             applicationObject.DoCmd.OpenModule(stringModuleName, searchForm.ObjectsListbox.Text)
         End If
@@ -705,7 +734,6 @@ HandleErr:
         ObjectSetting.SetObjectType("Module")
         ObjectSetting.LastTableorQueryObjectType = ""
         ShowSearchForm(False, searchForm)
-        ListProcedures()
     End Sub
 
     Private Sub MenuCommandListAllProcedures_Click(Ctrl As Microsoft.Office.Core.CommandBarButton, ByRef CancelDefault As Boolean) Handles MenuCommandListAllProcedures.Click

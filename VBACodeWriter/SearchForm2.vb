@@ -8,11 +8,26 @@
     Private ObjectSetting As New ObjectSettings
     Private WithEvents AddErrorHandlerButton As System.Windows.Forms.Button
     Private WithEvents SelectProcedureButton As System.Windows.Forms.Button
+    Private DrillDownButton As System.Windows.Forms.Button
     Private blnSelectProcedureRequested As Boolean
+    Private blnDrillDownRequested As Boolean
+    Private strDrillDownTargetObjectType As String
 
     Public ReadOnly Property SelectProcedureRequested() As Boolean
         Get
             Return blnSelectProcedureRequested
+        End Get
+    End Property
+
+    Public ReadOnly Property DrillDownRequested() As Boolean
+        Get
+            Return blnDrillDownRequested
+        End Get
+    End Property
+
+    Public ReadOnly Property DrillDownTargetObjectType() As String
+        Get
+            Return strDrillDownTargetObjectType
         End Get
     End Property
 
@@ -88,7 +103,54 @@
         End If
     End Sub
 
+    Private Function GetDrillDownTargetObjectType() As String
+        Select Case strObjectType
+            Case "Table", "Query"
+                Return "Field"
+            Case "Form", "Report"
+                Return "Control"
+            Case "Module"
+                Return "Procedure"
+            Case Else
+                Return ""
+        End Select
+    End Function
+
+    Private Function GetDrillDownButtonText() As String
+        Select Case GetDrillDownTargetObjectType()
+            Case "Field"
+                Return "Drill Down to Fields"
+            Case "Control"
+                Return "Drill Down to Controls"
+            Case "Procedure"
+                Return "Drill Down to Procedures"
+            Case Else
+                Return "Drill Down"
+        End Select
+    End Function
+
+    Private Sub UpdateDrillDownActionVisibility()
+        If DrillDownButton Is Nothing Then Exit Sub
+
+        Dim drillDownTargetType As String = GetDrillDownTargetObjectType()
+        Dim blnVisible As Boolean = Len(drillDownTargetType) > 0
+        DrillDownButton.Visible = blnVisible
+        DrillDownButton.Enabled = blnVisible AndAlso Me.ObjectsListbox.SelectedIndex >= 0
+        If blnVisible Then
+            DrillDownButton.Text = GetDrillDownButtonText()
+        End If
+    End Sub
+
+    Private Sub UpdateActionButtonVisibility()
+        UpdateProcedureActionVisibility()
+        UpdateDrillDownActionVisibility()
+    End Sub
+
     Private Sub SearchForm2_Load(sender As Object, e As EventArgs) Handles Me.Load
+        blnSelectProcedureRequested = False
+        blnDrillDownRequested = False
+        strDrillDownTargetObjectType = ""
+
         If AddErrorHandlerButton Is Nothing Then
             AddErrorHandlerButton = New System.Windows.Forms.Button()
             AddErrorHandlerButton.Text = "Add Error Handler"
@@ -111,10 +173,23 @@
             Me.Controls.Add(SelectProcedureButton)
             AddHandler SelectProcedureButton.Click, AddressOf SelectProcedureButton_Click
         End If
+        If DrillDownButton Is Nothing Then
+            DrillDownButton = New System.Windows.Forms.Button()
+            DrillDownButton.Text = "Drill Down"
+            DrillDownButton.Size = New System.Drawing.Size(152, 36)
+            DrillDownButton.Location = New System.Drawing.Point(711, 430)
+            DrillDownButton.BackColor = System.Drawing.SystemColors.Highlight
+            DrillDownButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+            DrillDownButton.ForeColor = System.Drawing.Color.White
+            Me.Controls.Add(DrillDownButton)
+            AddHandler DrillDownButton.Click, AddressOf DrillDownButton_Click
+        End If
         AddErrorHandlerButton.Visible = False
         AddErrorHandlerButton.Enabled = False
         SelectProcedureButton.Visible = False
         SelectProcedureButton.Enabled = False
+        DrillDownButton.Visible = False
+        DrillDownButton.Enabled = False
 
         Dim aob As Microsoft.Office.Interop.Access.AccessObject 'This crashes when you use the full object don't know why
         Dim Table As Microsoft.Office.Interop.Access.Dao.TableDef
@@ -267,7 +342,7 @@
                 Me.ObjectsListbox.Items.Add(varArray(i))
             End If
         Next
-        UpdateProcedureActionVisibility()
+        UpdateActionButtonVisibility()
         Me.Text = "Search for " & strObjectType
         Me.SearchTextBox.Focus()
 
@@ -373,6 +448,27 @@ ErrorHandler:
         Dim procedureName As String = Trim(Me.ObjectsListbox.Text)
         If Len(procedureName) = 0 Then Exit Sub
         blnSelectProcedureRequested = True
+        Me.Close()
+    End Sub
+
+    Private Sub DrillDownButton_Click(sender As Object, e As EventArgs)
+        If Me.ObjectsListbox.SelectedIndex < 0 Then Exit Sub
+
+        Dim selectedObjectName As String = Trim(Me.ObjectsListbox.Text)
+        If Len(selectedObjectName) = 0 Then Exit Sub
+
+        Dim drillDownTargetType As String = GetDrillDownTargetObjectType()
+        If Len(drillDownTargetType) = 0 Then Exit Sub
+
+        strObjectName = selectedObjectName
+        If drillDownTargetType = "Control" Then
+            stringFormOrReport = strObjectType
+        Else
+            stringFormOrReport = ""
+        End If
+
+        strDrillDownTargetObjectType = drillDownTargetType
+        blnDrillDownRequested = True
         Me.Close()
     End Sub
 
@@ -519,7 +615,7 @@ ErrorHandler:
         Else
             Me.OkayButton.Enabled = False
         End If
-        UpdateProcedureActionVisibility()
+        UpdateActionButtonVisibility()
     End Sub
 
     Private Sub SelectSecondButton_Click(sender As Object, e As EventArgs) Handles SelectSecondButton.Click

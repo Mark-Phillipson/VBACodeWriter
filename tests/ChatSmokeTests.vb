@@ -152,8 +152,11 @@ Module Program
             Check(view.Text.Contains("Heading") AndAlso view.Text.Contains("SELECT *"), "native Markdown rendering")
             view.Select(view.Text.IndexOf("Bold", StringComparison.Ordinal), 4)
             Check(view.SelectionFont.Bold, "bold formatting")
+            Check(view.SelectionColor.ToArgb() = Color.FromArgb(32, 35, 39).ToArgb() AndAlso
+                  view.SelectionBackColor.ToArgb() = Color.White.ToArgb(), "light transcript text and background")
             view.Select(view.Text.IndexOf("Sub Example", StringComparison.Ordinal), 3)
             Check(view.SelectionFont.Name = "Consolas", "monospaced code formatting")
+            Check(view.SelectionBackColor.ToArgb() = Color.FromArgb(240, 243, 246).ToArgb(), "light code block background")
             Check(view.Text.Contains("<script>"), "HTML displayed as inert text")
         End Using
     End Sub
@@ -166,12 +169,20 @@ Module Program
         instance.GetType().GetMethod(name, BindingFlags.Instance Or BindingFlags.NonPublic).Invoke(instance, arguments)
     End Sub
 
+    Private Sub CheckLightControls(control As Control)
+        Check(control.BackColor.GetBrightness() > 0.5F, "light background: " & control.GetType().Name)
+        For Each child As Control In control.Controls
+            CheckLightControls(child)
+        Next
+    End Sub
+
     Private Sub TestSidebarAndForm()
         Dim previousKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY")
         Try
             Environment.SetEnvironmentVariable("OPENAI_API_KEY", Nothing)
             Dim formType = GetType(VBACodeWriter.ProcedureChatForm)
             Using panel = DirectCast(Activator.CreateInstance(formType, New Object() {Nothing}), Form)
+                CheckLightControls(panel)
                 Check(Field(Of TableLayoutPanel)(panel, "chatLayout").RowStyles(2).Height > 0, "missing key prompts inline")
                 Dim input = Field(Of TextBox)(panel, "keyInput")
                 Check(input.UseSystemPasswordChar, "masked key input")
