@@ -33,14 +33,21 @@ Friend NotInheritable Class ChatMarkdown
                                  Optional code As Boolean = False, Optional size As Single = 10.0F)
         view.SelectionStart = view.TextLength
         view.SelectionLength = 0
+        Dim darkTheme = IsDarkBackground(view.BackColor)
+        Dim textColor = If(darkTheme, Color.Gainsboro, Color.FromArgb(32, 35, 39))
+        Dim plainBackColor = If(darkTheme, view.BackColor, Color.White)
+        Dim codeBackColor = If(darkTheme, Color.FromArgb(45, 45, 48), Color.FromArgb(240, 243, 246))
         Using textFont As New Font(If(code, "Consolas", "Segoe UI"), size, style)
             view.SelectionFont = textFont
-            view.SelectionColor = Color.FromArgb(32, 35, 39)
-            view.SelectionBackColor = If(code, Color.FromArgb(240, 243, 246), Color.White)
+            view.SelectionColor = textColor
+            view.SelectionBackColor = If(code, codeBackColor, plainBackColor)
             view.AppendText(text)
         End Using
     End Sub
 
+    Private Shared Function IsDarkBackground(color As Color) As Boolean
+        Return ((CInt(color.R) * 299) + (CInt(color.G) * 587) + (CInt(color.B) * 114)) < 128000
+    End Function
     Private Shared Sub RenderBlocks(view As RichTextBox, blocks As ContainerBlock, depth As Integer)
         For Each block In blocks
             If TypeOf block Is CodeBlock Then

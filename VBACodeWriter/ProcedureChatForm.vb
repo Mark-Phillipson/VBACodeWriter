@@ -29,6 +29,12 @@ Public Class ProcedureChatForm
     Private ReadOnly copySnippetButton As New Button() With {.Text = "Copy Code", .AutoSize = True, .Enabled = False}
     Private ReadOnly insertSnippetButton As New Button() With {.Text = "Insert Code", .AutoSize = True, .Enabled = False}
     Private ReadOnly toolbar As New ToolStrip() With {.GripStyle = ToolStripGripStyle.Hidden, .Dock = DockStyle.Fill}
+    Private Shared ReadOnly DarkWindowColor As Color = Color.FromArgb(30, 30, 30)
+    Private Shared ReadOnly DarkSurfaceColor As Color = Color.FromArgb(37, 37, 38)
+    Private Shared ReadOnly DarkInputColor As Color = Color.FromArgb(45, 45, 48)
+    Private Shared ReadOnly DarkBorderColor As Color = Color.FromArgb(62, 62, 64)
+    Private Shared ReadOnly DarkTextColor As Color = Color.Gainsboro
+    Private Shared ReadOnly DarkMutedTextColor As Color = Color.FromArgb(200, 200, 200)
     Private ReadOnly newChatButton As New ToolStripButton("New Chat")
     Private ReadOnly keyButton As New ToolStripButton("API Key")
     Private ReadOnly copyResponseButton As New ToolStripButton("Copy Response") With {.Enabled = False}
@@ -90,6 +96,7 @@ Public Class ProcedureChatForm
         chatLayout.Controls.Add(sendActions, 0, 7)
         chatLayout.Controls.Add(statusLabel, 0, 8)
         Controls.Add(chatLayout)
+        ApplyDarkTheme()
 
         AddHandler sendButton.Click, AddressOf SendMessage
         AddHandler cancelRequestButton.Click, Sub() pendingRequest?.Cancel()
@@ -290,6 +297,140 @@ Public Class ProcedureChatForm
             statusLabel.Text = "Unable to insert code. Open an editable module, or use Copy Code."
         End Try
     End Sub
+
+    Private Sub ApplyDarkTheme()
+        BackColor = DarkWindowColor
+        ForeColor = DarkTextColor
+        chatLayout.BackColor = DarkWindowColor
+        keyRow.BackColor = DarkWindowColor
+        contextLabel.ForeColor = DarkTextColor
+        statusLabel.ForeColor = DarkMutedTextColor
+        transcript.BackColor = DarkSurfaceColor
+        transcript.ForeColor = DarkTextColor
+        prompt.BackColor = DarkInputColor
+        prompt.ForeColor = DarkTextColor
+        keyInput.BackColor = DarkInputColor
+        keyInput.ForeColor = DarkTextColor
+        modelInput.BackColor = DarkInputColor
+        modelInput.ForeColor = DarkTextColor
+        snippetPicker.BackColor = DarkInputColor
+        snippetPicker.ForeColor = DarkTextColor
+        toolbar.BackColor = DarkSurfaceColor
+        toolbar.ForeColor = DarkTextColor
+        toolbar.Renderer = New DarkToolStripRenderer()
+        For Each item As ToolStripItem In toolbar.Items
+            item.ForeColor = DarkTextColor
+        Next
+        ApplyControlTheme(Me)
+    End Sub
+
+    Private Sub ApplyControlTheme(parent As Forms.Control)
+        For Each child As Forms.Control In parent.Controls
+            If TypeOf child Is ToolStrip Then
+                Continue For
+            End If
+
+            If TypeOf child Is Forms.Label Then
+                child.ForeColor = DarkTextColor
+                child.BackColor = Color.Transparent
+            ElseIf TypeOf child Is TextBoxBase Then
+                child.BackColor = If(TypeOf child Is RichTextBox, DarkSurfaceColor, DarkInputColor)
+                child.ForeColor = DarkTextColor
+            ElseIf TypeOf child Is Forms.ComboBox Then
+                child.BackColor = DarkInputColor
+                child.ForeColor = DarkTextColor
+            ElseIf TypeOf child Is Button Then
+                Dim button = DirectCast(child, Button)
+                button.BackColor = DarkSurfaceColor
+                button.ForeColor = DarkTextColor
+                button.FlatStyle = FlatStyle.Flat
+                button.UseVisualStyleBackColor = False
+                button.FlatAppearance.BorderColor = DarkBorderColor
+            ElseIf TypeOf child Is TableLayoutPanel OrElse TypeOf child Is FlowLayoutPanel OrElse TypeOf child Is Panel Then
+                child.BackColor = DarkWindowColor
+            End If
+
+            If child.HasChildren Then ApplyControlTheme(child)
+        Next
+    End Sub
+
+    Private NotInheritable Class DarkToolStripRenderer
+        Inherits ToolStripProfessionalRenderer
+
+        Public Sub New()
+            MyBase.New(New DarkToolStripColorTable())
+        End Sub
+    End Class
+
+    Private NotInheritable Class DarkToolStripColorTable
+        Inherits ProfessionalColorTable
+
+        Public Overrides ReadOnly Property ToolStripGradientBegin As Color
+            Get
+                Return DarkSurfaceColor
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ToolStripGradientMiddle As Color
+            Get
+                Return DarkSurfaceColor
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ToolStripGradientEnd As Color
+            Get
+                Return DarkSurfaceColor
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ImageMarginGradientBegin As Color
+            Get
+                Return DarkSurfaceColor
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ImageMarginGradientMiddle As Color
+            Get
+                Return DarkSurfaceColor
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property ImageMarginGradientEnd As Color
+            Get
+                Return DarkSurfaceColor
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MenuItemSelected As Color
+            Get
+                Return DarkBorderColor
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MenuItemBorder As Color
+            Get
+                Return DarkBorderColor
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MenuItemSelectedGradientBegin As Color
+            Get
+                Return DarkBorderColor
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MenuItemSelectedGradientEnd As Color
+            Get
+                Return DarkBorderColor
+            End Get
+        End Property
+
+        Public Overrides ReadOnly Property MenuBorder As Color
+            Get
+                Return DarkBorderColor
+            End Get
+        End Property
+    End Class
 
     Protected Overrides Sub Dispose(disposing As Boolean)
         If disposing AndAlso Not resourcesDisposed Then
